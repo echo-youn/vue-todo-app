@@ -6,7 +6,7 @@
           <option value="doing">doing</option>
           <option value="done">done</option>
         </select>
-        {{ card }}
+        <input v-model="cardUpdate" />
         <button @click="update">수정</button>
         <button @click="remove">삭제</button>
     </div>
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       selection: 'todo',
+      cardUpdate: this.card,
     };
   },
   methods: {
@@ -31,7 +32,8 @@ export default {
     update() {
       this.$emit('update', {
         target: this.selection,
-        title: this.card,
+        title: this.cardUpdate,
+        baseTitle: this.card,
       });
     },
   },

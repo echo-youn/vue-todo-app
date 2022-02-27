@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     onUpdated(payload) {
-      if (this.type === payload.target) {
+      if (this.type === payload.target && this.cards.find((x) => x === payload.title)) {
         alert('같은곳으로 수정 불가능');
         return;
       }

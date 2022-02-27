@@ -39,7 +39,7 @@ export default {
       this.init();
     },
     update(payload) {
-      this.$data[payload.base] = this.$data[payload.base].filter((x) => x !== payload.title);
+      this.$data[payload.base] = this.$data[payload.base].filter((x) => x !== payload.baseTitle);
       box.setItem(payload.base, this.$data[payload.base]);
       this.$data[payload.target].push(payload.title);
       box.setItem(payload.target, this[payload.target]);
