@@ -1,18 +1,19 @@
 const box = {
   getItem(key) {
     return new Promise((resolve, reject) => {
-      const item = localStorage.getItem(key);
-      if (item) {
-        setTimeout(() => {
+      setTimeout(() => {
+        const item = localStorage.getItem(key);
+        if (item) {
           try {
             resolve(JSON.parse(item));
           } catch (ex) {
             console.error('Error on parse Json.\n message : ', ex.message);
             reject(ex);
           }
+        } else {
           resolve(item);
-        }, 3000);
-      }
+        }
+      }, 1500);
     });
   },
   setItem(key, value) {
