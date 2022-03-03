@@ -3,9 +3,9 @@
     <TodoHeader></TodoHeader>
     <TodoSelectbox @selectedState="selectedState"></TodoSelectbox>
     <TodoInput v-on:addList="addList"></TodoInput>
-    <TodoList v-bind:propsdata="todoItems" @removeTodo="removeTodo"></TodoList>
-    <DoingList v-bind:propsdata="doingItems" @removeDoing="removeDoing"></DoingList>
-    <DoneList v-bind:propsdata="doneItems" @removeDone="removeDone"></DoneList>
+    <MyList title="To do" type="todo" :list="todoItems" @removed="onRemoved"></MyList>
+    <MyList title="Doing" type="doing" :list="doingItems" @removed="onRemoved"></MyList>
+    <MyList title="Done" type="done" :list="doneItems" @removed="onRemoved"></MyList>
     <TodoFooter v-on:removeAll="clearAll"></TodoFooter>
   </div>
 </template>
@@ -14,10 +14,9 @@
 import TodoHeader from './components/TodoHeader.vue';
 import TodoSelectbox from './components/TodoSelectbox.vue';
 import TodoInput from './components/TodoInput.vue';
-import TodoList from './components/TodoList.vue';
-import DoingList from './components/DoingList.vue';
-import DoneList from './components/DoneList.vue';
+import MyList from './components/MyList.vue'
 import TodoFooter from './components/TodoFooter.vue';
+import store from './utils/storage';
 
 export default {
   data() {
@@ -28,10 +27,18 @@ export default {
       selected: 'todo',
     }
   },
-  created() {
-    this.todoItems = JSON.parse(localStorage.getItem('todo')); 
-    this.doingItems = JSON.parse(localStorage.getItem('doing'));
-    this.doneItems = JSON.parse(localStorage.getItem('done'));  
+  async created() {
+    let promisses = [];
+    promisses.push(store.getItem('todo'));
+    promisses.push(store.getItem('doing'));
+    promisses.push(store.getItem('done'));
+    let [todo,doing,done] = await Promise.allSettled(promisses);
+    this.todoItems = todo.value;
+    this.doingItems = doing.value;
+    this.doneItems = done.value;
+    // this.todoItems = await ;
+    // this.doingItems = await ;
+    // this.doneItems = await store.getItem('done');
   },
   methods: {
     addList(value) {
@@ -57,17 +64,8 @@ export default {
       this.doingItems = [];
       this.doneItems = [];
     },
-    removeTodo(index) {
-      this.todoItems.splice(index, 1);
-      localStorage.setItem('todo', JSON.stringify(this.todoItems));
-    },
-    removeDoing(index) {
-      this.doingItems.splice(index, 1);
-      localStorage.setItem('doing', JSON.stringify(this.doingItems));
-    },
-    removeDone(index) {
-      this.doneItems.splice(index, 1);
-      localStorage.setItem('done', JSON.stringify(this.doneItems));
+    onRemoved(list, type) {
+      localStorage.setItem(type, JSON.stringify(list));
     },
     selectedState(selected) {
       this.selected = selected;
@@ -77,9 +75,7 @@ export default {
     TodoHeader,
     TodoSelectbox,
     TodoInput,
-    TodoList,
-    DoingList,
-    DoneList,
+    MyList,
     TodoFooter,
   },
 };

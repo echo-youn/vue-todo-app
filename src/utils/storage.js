@@ -11,7 +11,7 @@ const box = {
             reject(ex);
           }
           resolve(item);
-        }, 1000);
+        }, 300);
       }
     });
   },
