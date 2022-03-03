@@ -1,7 +1,7 @@
 <template>
   <div class="inputBox shadow">
-    <input type="text" v-model="newTodoItem" placeholder="Type what you have to do" @keyup.enter="addTodo">
-    <span class="addContainer" @click="addTodo">
+    <input type="text" v-model="newTodoItem" placeholder="Type what you have to do" @keyup.enter="addList">
+    <span class="addContainer" @click="addList">
       <i class="addBtn fas fa-plus" aria-hidden="true"></i>
     </span>
     <modal v-if="showModal" @close="showModal = false" :show="showModal">
@@ -27,10 +27,10 @@ export default {
     };
   },
   methods: {
-    addTodo() {
+    addList() {
       if (this.newTodoItem !== '') {
         const value = this.newTodoItem && this.newTodoItem.trim();
-        this.$emit('addTodo', value);
+        this.$emit('addList', value);
         this.clearInput();
       } else {
         this.showModal = !this.showModal;
@@ -38,6 +38,9 @@ export default {
     },
     clearInput() {
       this.newTodoItem = '';
+    },
+    selectedState(selected) {
+      this.selected = selected;
     },
   },
   components: {

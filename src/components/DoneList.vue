@@ -2,10 +2,10 @@
   <section>
     <h4>Done</h4>
     <transition-group name="list" tag="ul">
-      <li v-for="(todoItem, index) in propsdata" :key="todoItem" class="shadow">
+      <li v-for="(doneItem, index) in propsdata" :key="doneItem" class="shadow">
         <i class="checkBtn fas fa-check" aria-hidden="true"></i>
-        {{ todoItem }}
-        <span class="removeBtn" type="button" @click="removeTodo(todoItem, index)">
+        {{ doneItem }}
+        <span class="removeBtn" type="button" @click="removeDone(doneItem, index)">
         <i class="far fa-trash-alt" aria-hidden="true"></i>
         </span>
       </li>
@@ -17,8 +17,8 @@
 export default {
   props: ['propsdata'],
   methods: {
-    removeTodo(todoItem, index) {
-      this.$emit('removeTodo', todoItem, index);
+    removeDone(doneItem, index) {
+      this.$emit('removeDone', doneItem, index);
     },
   },
 };

@@ -1,16 +1,26 @@
 <template>
-  <div class="selectBox">
-    <select>
-      <option>To Do</option>
-      <option>Doing</option>
-      <option>Done</option>
+  <div class="selectBox shadow">
+    <select v-model="selected" @change="selectedState()">
+      <option value="todo">To Do</option>
+      <option value="doing">Doing</option>
+      <option value="done">Done</option>
     </select>
   </div>
 </template>
 
 <script>
 export default {
-
+  data () {
+    return {
+      selected: 'todo',
+    }
+  },
+  methods: {
+    selectedState () {
+      this.$emit('selectedState', this.selected);
+      this.$on('selectedState', this.selected);
+    },
+  },
 }
 </script>
 
@@ -19,6 +29,8 @@ export default {
     line-height: 50px;
     background: white;
     width: 5rem;
+    margin: 0.5rem auto;
+    border-radius: 5px;
   }
   select {
     border-style: none;
