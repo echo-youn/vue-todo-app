@@ -5,7 +5,7 @@
       <li v-for="(doneItem, index) in propsdata" :key="doneItem" class="shadow">
         <i class="checkBtn fas fa-check" aria-hidden="true"></i>
         {{ doneItem }}
-        <span class="removeBtn" type="button" @click="removeDone(doneItem, index)">
+        <span class="removeBtn" type="button" @click="removeDone(index)">
         <i class="far fa-trash-alt" aria-hidden="true"></i>
         </span>
       </li>
@@ -17,8 +17,8 @@
 export default {
   props: ['propsdata'],
   methods: {
-    removeDone(doneItem, index) {
-      this.$emit('removeDone', doneItem, index);
+    removeDone(index) {
+      this.$emit('removeDone', index);
     },
   },
 };

@@ -5,7 +5,7 @@
       <li v-for="(todoItem, index) in propsdata" :key="todoItem" class="shadow">
         <i class="checkBtn fas fa-check" aria-hidden="true"></i>
         {{ todoItem }}
-        <span class="removeBtn" type="button" @click="removeTodo(todoItem, index)">
+        <span class="removeBtn" type="button" @click="removeTodo(index)">
         <i class="far fa-trash-alt" aria-hidden="true"></i>
         </span>
       </li>
@@ -17,8 +17,8 @@
 export default {
   props: ['propsdata'],
   methods: {
-    removeTodo(todoItem, index) {
-      this.$emit('removeTodo', todoItem, index);
+    removeTodo(index) {
+      this.$emit('removeTodo', index);
     },
   },
 };

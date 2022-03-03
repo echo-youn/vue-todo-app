@@ -29,26 +29,27 @@ export default {
     }
   },
   created() {
-    if (localStorage.length > 0) {
-      if (selected === 'todo') {
-        for (var i = 0; i < localStorage.length; i++) {
-          this.todoItems.push(localStorage.key(i));
-        }
-      } else if (selected === 'doing') {
-        for (var i = 0; i < localStorage.length; i++) {
-          this.doingItems.push(localStorage.key(i));
-        }
-      } else if (selected === 'done') {
-        for (var i = 0; i < localStorage.length; i++) {
-          this.doneItems.push(localStorage.key(i));
-        }
-      }
-    }
+    this.todoItems = JSON.parse(localStorage.getItem('todo')); 
+    this.doingItems = JSON.parse(localStorage.getItem('doing'));
+    this.doneItems = JSON.parse(localStorage.getItem('done'));  
   },
   methods: {
-    addList(todoItem) {
-      localStorage.setItem(todoItem, todoItem);
-      this.todoItems.push(todoItem);
+    addList(value) {
+      let target = this.selected
+      switch (target) {
+        case 'todo':
+          this.todoItems.push(value);
+          localStorage.setItem(target, JSON.stringify(this.todoItems)); 
+          break
+        case 'doing':
+          this.doingItems.push(value);
+          localStorage.setItem(target, JSON.stringify(this.doingItems)); 
+          break
+        case 'done':
+          this.doneItems.push(value);
+          localStorage.setItem(target, JSON.stringify(this.doneItems)); 
+        break
+      }
     },
     clearAll() {
       localStorage.clear();
@@ -56,17 +57,17 @@ export default {
       this.doingItems = [];
       this.doneItems = [];
     },
-    removeTodo(todoItem, index) {
-      localStorage.removeItem(todoItem);
+    removeTodo(index) {
       this.todoItems.splice(index, 1);
+      localStorage.setItem('todo', JSON.stringify(this.todoItems));
     },
-    removeDoing(doingItem, index) {
-      localStorage.removeItem(doingItem);
-      this.doingItem.splice(index, 1);
+    removeDoing(index) {
+      this.doingItems.splice(index, 1);
+      localStorage.setItem('doing', JSON.stringify(this.doingItems));
     },
-    removeDone(doneItem, index) {
-      localStorage.removeItem(doneItem);
-      this.doneItem.splice(index, 1);
+    removeDone(index) {
+      this.doneItems.splice(index, 1);
+      localStorage.setItem('done', JSON.stringify(this.doneItems));
     },
     selectedState(selected) {
       this.selected = selected;

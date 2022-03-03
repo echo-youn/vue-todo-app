@@ -18,7 +18,6 @@ export default {
   methods: {
     selectedState () {
       this.$emit('selectedState', this.selected);
-      this.$on('selectedState', this.selected);
     },
   },
 }
