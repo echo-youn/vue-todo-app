@@ -30,8 +30,8 @@
 export default {
   props: {
     show: Boolean,
-  }
-}
+  },
+};
 </script>
 
 <style scope>

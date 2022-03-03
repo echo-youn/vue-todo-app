@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h4>To Do</h4>
+    <h4>Doing</h4>
     <transition-group name="list" tag="ul">
       <li v-for="(todoItem, index) in propsdata" :key="todoItem" class="shadow">
         <i class="checkBtn fas fa-check" aria-hidden="true"></i>
