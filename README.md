@@ -1,4 +1,4 @@
-# todo
+# toordie APP
 
 ## Project setup
 ```
