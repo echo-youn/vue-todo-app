@@ -1,24 +1,16 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <todo-app></todo-app>
+  </div>
 </template>
 
 <script>
+import ToordieApp from './components/ToordieApp.vue'
+
 export default {
   name: 'App',
-  components: {},
-  methods: {},
-  data() {
-    return {};
-  },
-  computed: {},
-  beforeCreate() {},
-  created() {},
-  beforeMount() {},
-  mounted() {},
-  beforeUpdate() {},
-  updated() {},
-};
+  components: {
+    ToordieApp
+  }
+}
 </script>
-
-<style lang="scss">
-</style>
