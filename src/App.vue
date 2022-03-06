@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import ToordieApp from './components/ToordieApp.vue'
+import ToordieApp from './components/ToordieApp.vue';
 
 export default {
   name: 'App',
   components: {
-    ToordieApp
+    ToordieApp,
   }
 }
 </script>

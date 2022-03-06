@@ -16,7 +16,7 @@
     <table class="table table-bordered mt-5">
       <thead>
         <tr>
-          <th scope="col">Todo</th>
+          <th scope="col">To-do</th>
           <th scope="col" style="width: 120px">status</th>
           <th scope="col" class="text-center">#</th>
           <th scope="col" class="text-center">#</th>
@@ -34,7 +34,7 @@
               class="pointer noselect"
               @click="changeStatus(index)"
               :class="{
-                'text-danger': task.status === 'todo',
+                'text-danger': task.status === 'to-do',
                 'text-success': task.status === 'done',
                 'text-warning': task.status === 'doing',
               }"
@@ -60,7 +60,7 @@
 
 <script>
 export default {
-  name: "toordielist",
+  name: "ToorDieList",
   props: {
     msg: String,
   },
@@ -69,8 +69,7 @@ export default {
     return {
       task: "",
       editedTask: null,
-      statuses: ["todo", "doing", "done"],
-
+      statuses: ["to-do", "doing", "done"], //상태를 부르는 단어 state status 이용하는데 복수용 사용했을 시에도 states가 낫다고 함!
       //상태 todo pending finished 설정하기
       tasks: [
         {
@@ -89,31 +88,22 @@ export default {
     };
   },
 
-  methods: {
-
+  methods: { // 메서드 띄어쓰기 주의!!
     capitalizeFirstChar(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
     },
-
-
     changeStatus(index) {
-      let newIndex = this.statuses.indexOf(this.tasks[index].status);
+      let newIndex = this.statuses.indexOf(this.tasks[index].status); 
       if (++newIndex > 2) newIndex = 0;
       this.tasks[index].status = this.statuses[newIndex];
     },
-
-
     deleteTask(index) {
       this.tasks.splice(index, 1);
     },
-
-
     editTask(index) {
       this.task = this.tasks[index].name;
       this.editedTask = index;
     },
-
-
     submitTask() {
       if (this.task.length === 0) return;
 
@@ -127,7 +117,6 @@ export default {
           status: "todo",
         });
       }
-
       this.task = "";
     },
   },
