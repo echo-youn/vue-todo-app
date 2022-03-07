@@ -3,9 +3,9 @@
     <TodoHeader></TodoHeader>
     <TodoSelectbox @selectedState="selectedState"></TodoSelectbox>
     <TodoInput v-on:addList="addList"></TodoInput>
-    <MyList title="To do" type="todo" :list="todoItems" @removed="onRemoved"></MyList>
-    <MyList title="Doing" type="doing" :list="doingItems" @removed="onRemoved"></MyList>
-    <MyList title="Done" type="done" :list="doneItems" @removed="onRemoved"></MyList>
+    <TodoAppList title="To do" type="todo" :list="todoItems" @removed="onRemoved"></TodoAppList>
+    <TodoAppList title="Doing" type="doing" :list="doingItems" @removed="onRemoved"></TodoAppList>
+    <TodoAppList title="Done" type="done" :list="doneItems" @removed="onRemoved"></TodoAppList>
     <TodoFooter v-on:removeAll="clearAll"></TodoFooter>
   </div>
 </template>
@@ -14,7 +14,7 @@
 import TodoHeader from './components/TodoHeader.vue';
 import TodoSelectbox from './components/TodoSelectbox.vue';
 import TodoInput from './components/TodoInput.vue';
-import MyList from './components/MyList.vue'
+import TodoAppList from './components/TodoAppList.vue'
 import TodoFooter from './components/TodoFooter.vue';
 import store from './utils/storage';
 
@@ -75,8 +75,9 @@ export default {
     TodoHeader,
     TodoSelectbox,
     TodoInput,
-    MyList,
+    TodoAppList,
     TodoFooter,
+    TodoAppList,
   },
 };
 </script>
